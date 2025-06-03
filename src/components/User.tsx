@@ -1,24 +1,28 @@
+import type { AllowedId, AllowedName } from "./Allow";
+import Button from "./Button";
 
 type UserProps = {
     users: {
-        id: number;
-        name: string;
+        id: AllowedId;
+        name: AllowedName;
         age: number;
         isReg: boolean;
     }[]
 
-}
+};
 
 const User = ({ users }: UserProps) => {
     return (
         <div>
-            {
-                users.map(user => <div className="text-rose-400 bg-cyan-300 border flex justify-center items-center gap-5 my-3 w-1/2 py-10">
-                    <h2 className="text-2xl text-center">The Name is {user.name} and id is {user.id}</h2>
-
-                    {user.isReg ? <p>Registerd</p> : <p>Not registerd</p>}
-                </div>)
-            }
+            {users.map(user => (
+                <div key={user.id} className="text-rose-900 bg-indigo-300 border flex justify-center items-center gap-5 my-3 p-5">
+                    <h2 className="text-2xl text-center">
+                        The Name is <span className="text-black">{user.name}</span> and id is <span className="text-indigo-600 text-sm-font-bold">{user.id}</span>
+                    </h2>
+                    {user.isReg ? <p>Registered</p> : <p>Not registered</p>}
+                    <Button>Click Me</Button>
+                </div>
+            ))}
         </div>
     );
 };
